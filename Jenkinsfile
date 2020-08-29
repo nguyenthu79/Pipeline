@@ -17,8 +17,6 @@ pipeline {
       }
       steps {
         git(url: FRONTEND_GIT, branch: FRONTEND_BRANCH)
-	sh 'chmod +x /etc/profile.d/maven.sh'
-	sh 'source /etc/profile.d/maven.sh'
         sh 'mvn clean verify allure:report -Dbrowser=Chrome -Dsuite=**/Rosy/*.story'
         stash(name: 'frontend', includes: 'build/*/**')
       }
