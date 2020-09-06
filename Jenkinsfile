@@ -3,7 +3,7 @@ pipeline {
     stages {
        stage('Build JS') {
       steps {
-        git url "https://github.com/nguyenthu79/rosyCICD.git"
+        git 'https://github.com/nguyenthu79/rosyCICD.git'
         sh 'clean verify allure:report -Dbrowser=Chrome -Dsuite=**/Rosy/*.story'
       
       }
