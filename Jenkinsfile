@@ -1,7 +1,7 @@
 pipeline {
   agent any
   environment {
-    FRONTEND_GIT = 'https://github.com/nguyenthu79/newtest.git'
+    FRONTEND_GIT = 'https://github.com/nguyenthu79/rosyCICD.git'
     FRONTEND_BRANCH = 'master'
     FRONTEND_IMAGE = 'comartek1/docker101tutorial'
     FRONTEND_SERVER = '1.2.3.4'
@@ -17,7 +17,7 @@ pipeline {
       }
       steps {
         git(url: FRONTEND_GIT, branch: FRONTEND_BRANCH)
-        sh 'mvn clean verify'
+        sh 'clean verify allure:report -Dbrowser=Chrome -Dsuite=**/Rosy/*.story'
         stash(name: 'frontend', includes: 'build/*/**')
       }
     }
