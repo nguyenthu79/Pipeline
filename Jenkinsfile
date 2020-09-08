@@ -1,7 +1,7 @@
 node {
   stage('Test') {
         git 'https://github.com/nguyenthu79/rosyCICD.git'
-         sh 'android.sh C:\Users\Admin\Desktop\Rosy-app-releaseDev-0.18.6.apk'
+      
   }
   stage('Build report'){
     allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
