@@ -1,8 +1,6 @@
 node {
   stage('Test') {
-     steps {
         git 'https://github.com/nguyenthu79/rosyCICD.git'
-      }
   }
   stage('Build report'){
     allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
