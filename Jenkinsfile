@@ -1,25 +1,15 @@
-pipeline {
-    agent any
-    stages {
-       stage('Build JS') {
-      steps {
+node {
+  stage('Test') {
+     steps {
         git 'https://github.com/nguyenthu79/rosyCICD.git'
-        sh 'clean verify allure:report -Dbrowser=Chrome -Dsuite=**/Rosy/*.story'
-      
       }
-    }
-        stage('reports') {
-    steps {
-    script {
-            allure([
-                    includeProperties: false,
-                    jdk: '',
-                    properties: [],
-                    reportBuildPolicy: 'ALWAYS',
-                    results: [[path: 'target/allure-results']]
-            ])
-    }
-    }
-}
-    }
+  }
+  stage('Build report'){
+    allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+  }
+  stage('Send Summary'){
+    emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
+            subject: "[Jenkins] Test Execution Summary",
+            to: "thung26897@gmail.com"
+  }
 }
