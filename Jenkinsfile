@@ -4,7 +4,7 @@ node {
       
   }
   stage('Build report'){
-    allure includeProperties: false, jdk: '', results: [[path: 'target/allure-results']]
+    allure includeProperties: false, jdk: '', results: [[path: 'target\allure-results']]
   }
   stage('Send Summary'){
     emailext body: '''${SCRIPT, template="allure-report.groovy"}''',
