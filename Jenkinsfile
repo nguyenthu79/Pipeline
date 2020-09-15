@@ -1,6 +1,7 @@
 node {
   stage('Test') {
         git 'https://github.com/nguyenthu79/rosyCICD.git'
+    sh 'mvn clean verify allure:report -Dbrowser=Chrome -Dsuite=**/Rosy/*.story'
       
   }
   stage('Build report'){
